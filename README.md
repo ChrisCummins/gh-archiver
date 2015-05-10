@@ -1,72 +1,25 @@
-<h1>
-  gh-archiver
-  <a href="https://badge.fury.io/py/gh-archiver">
-    <img src="https://img.shields.io/pypi/v/gh-archiver.svg?colorB=green&style=flat">
-  </a> <a href="https://tldrlegal.com/license/mit-license" target="_blank">
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat">
-  </a>
-</h1>
+# Labm8
 
-Clone and update a GitHub user's repositories locally:
-
-```sh
-$ gh-archiver ChrisCummins -o ~/src/GitHub/
-cloning atom
-cloning autoencoder
-updating chriscummins.cc
-...
-```
-
-Or mirror to a [gogs](https://gogs.io) server:
-
-```sh
-$ gh-archiver ChrisCummins -o ~/gogs/repos/ChrisCummins --gogs --gogs-uid 1
-mirring atom ... 201
-mirroring autoencoder ... 201
-mirroring chriscummins.cc ... 201
-...
-```
+A collection of functions and utilities for collecting and
+manipulating experimental data.
 
 ## Installation
 
-```sh
-$ pip install gh-archiver
-```
-
-Requires Python >= 3.6.
-
-**GitHub credentials**
-
-Create a credentials file `~/.githubrc` with your GitHub username and password:
-
-```sh
-$ cat <<EOF > ~/.githubrc
-[User]
-Username = YourUsername
-Password = password1234
-EOF
-$ chmod 0600 ~/.githubrc
-```
-
-Alternatively, use flag `--githubrc <path>` to specify a path to the credentials file.
-
-**Gogs credentials**
-
-Create a credentials file `~/.gogsrc` with your Gogs server address and [token](https://github.com/gogits/go-gogs-client/wiki#access-token):
-
-```sh
-$ cat <<EOF > ~/.gogsrc
-[Server]
-Address = http://example.com:3000
-
-[User]
-Token = 39bbdb529fed7fc4f373410518745446d9901450
-EOF
-$ chmod 0600 ~/.gogsrc
-```
-
-Alternatively, use flag `--gogsrc <path>` to specify a path to the credentials file.
+Install with `sudo python ./setup.py install`.
 
 ## License
 
-Made with ❤️ by [Chris Cummins](http://chriscummins.cc). Released under [MIT License](https://tldrlegal.com/license/mit-license).
+Copyright 2015 Chris Cummins.
+
+Released under the terms of the
+[GNU General Public License, Version 3](http://www.gnu.org/copyleft/gpl.html).
+
+This is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+This software is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details.
