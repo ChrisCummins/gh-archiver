@@ -39,7 +39,11 @@ message GlobalConfig {
 message GlobalConfigOptions {
   required bool with_cuda = 1;
   required bool update_git_submodules = 2;
+<<<<<<< HEAD:config.proto
   required bool install_git_hooks = 4;
+=======
+  required bool with_git_hooks = 3;
+>>>>>>> 3c113e086... Add with_git_hooks field to config proto.:config/proto/config.proto
 }
 
 // A list of absolute paths to import system files and directories.
