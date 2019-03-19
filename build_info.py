@@ -47,7 +47,11 @@ def GetGithubCommitUrl(
   m = re.match(f"git@github\.com:([^/]+)/(.+)\.git", remote_url)
   if not m:
     return None
+<<<<<<< HEAD:build_info.py
   return f"https://github.com/{m.group(1)}/{m.group(2)}/commit/{commit_hash}"
+=======
+  return f'https://github.com/{m.group(1)}/{m.group(2)}/commit/{commit_hash}'
+>>>>>>> 43875bc73... Remove redundant parenthesis.:config/build_info.py
 
 
 def FormatShortRevision(html: bool = False) -> str:
