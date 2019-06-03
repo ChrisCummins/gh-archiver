@@ -13,6 +13,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+<<<<<<< HEAD:labm8/py/BUILD
+=======
+
+licenses(["notice"])  # Apache 2.0
+
+exports_files([
+    "LICENSE",
+    "README.md",
+])
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
 
 py_library(
     name = "app",
@@ -105,7 +115,11 @@ py_test(
     name = "bazelutil_test",
     size = "small",
     srcs = ["bazelutil_test.py"],
+<<<<<<< HEAD:labm8/py/BUILD
     data = ["//labm8/py/test_data:hello_world_file"],
+=======
+    data = ["//labm8/test_data:hello_world_file"],
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
     deps = [
         ":app",
         ":bazelutil",
@@ -134,7 +148,11 @@ py_test(
     name = "cache_test",
     size = "small",
     srcs = ["cache_test.py"],
+<<<<<<< HEAD:labm8/py/BUILD
     data = ["//labm8/py/test_data:jsoncache_file"],
+=======
+    data = ["//labm8/test_data:jsoncache_file"],
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
     deps = [
         ":app",
         ":cache",
@@ -159,8 +177,13 @@ py_test(
     size = "small",
     srcs = ["crypto_test.py"],
     data = [
+<<<<<<< HEAD:labm8/py/BUILD
         "//labm8/py/test_data:empty_file_file",
         "//labm8/py/test_data:hello_world_file",
+=======
+        "//labm8/test_data:empty_file_file",
+        "//labm8/test_data:hello_world_file",
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
     ],
     deps = [
         ":app",
@@ -306,10 +329,17 @@ py_test(
     size = "small",
     srcs = ["fs_test.py"],
     data = [
+<<<<<<< HEAD:labm8/py/BUILD
         "//labm8/py/test_data:data1_file",
         "//labm8/py/test_data:empty_file_file",
         "//labm8/py/test_data:hello_world_file",
         "//labm8/py/test_data:testdir_files",
+=======
+        "//labm8/test_data:data1_file",
+        "//labm8/test_data:empty_file_file",
+        "//labm8/test_data:hello_world_file",
+        "//labm8/test_data:testdir_files",
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
     ],
     deps = [
         ":app",
@@ -546,7 +576,11 @@ py_library(
         ":labdate",
         ":pbutil",
         ":system",
+<<<<<<< HEAD:labm8/py/BUILD
         "//labm8/py/internal:lockfile_pb_py",
+=======
+        "//labm8/internal:lockfile_pb_py",
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
     ],
 )
 
@@ -560,12 +594,16 @@ py_test(
         ":pbutil",
 <<<<<<< HEAD:labm8/py/BUILD
         ":test",
+<<<<<<< HEAD:labm8/py/BUILD
         # "//labm8/py/internal:lockfile_pb_py",
 =======
         "//labm8:test",
         "//labm8/proto:lockfile_py_pb2",
         "//third_party/py/absl",
 >>>>>>> ad2622a47... Port tests to //labm8:test.:labm8/BUILD
+=======
+        # "//labm8/internal:lockfile_pb_py",
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
     ],
 )
 
@@ -576,7 +614,11 @@ py_library(
     deps = [
         ":app",
         ":labdate",
+<<<<<<< HEAD:labm8/py/BUILD
         "//labm8/py/internal:logging_pb_py",
+=======
+        "//labm8/internal:logging_pb_py",
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
         "//third_party/py/absl",
     ],
 )
@@ -611,7 +653,11 @@ py_test(
     name = "make_test",
     size = "small",
     srcs = ["make_test.py"],
+<<<<<<< HEAD:labm8/py/BUILD
     data = ["//labm8/py/test_data:makeproj_files"],
+=======
+    data = ["//labm8/test_data:makeproj_files"],
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
     deps = [
         ":app",
         ":fs",
@@ -687,6 +733,7 @@ py_test(
 <<<<<<< HEAD:labm8/py/BUILD
         ":test",
         "//:config_pb_py",
+<<<<<<< HEAD:labm8/py/BUILD
         "//labm8/py/test_data:test_protos_pb_py",
     ],
 )
@@ -716,6 +763,9 @@ py_test(
         "//labm8/proto:test_protos",
         "//third_party/py/absl",
 >>>>>>> ad2622a47... Port tests to //labm8:test.:labm8/BUILD
+=======
+        "//labm8/test_data:test_protos_pb_py",
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
     ],
 )
 
@@ -736,20 +786,30 @@ py_test(
     name = "ppar_test",
     srcs = ["ppar_test.py"],
     data = [
+<<<<<<< HEAD:labm8/py/BUILD
         "//labm8/py/test_data/ppar:proto_worker",
         "//labm8/py/test_data/ppar:proto_worker_requires_args",
         "//labm8/py/test_data/ppar:unexpected_output_proto_worker",
+=======
+        "//labm8/test_data/ppar:proto_worker",
+        "//labm8/test_data/ppar:proto_worker_requires_args",
+        "//labm8/test_data/ppar:unexpected_output_proto_worker",
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
     ],
     deps = [
         ":ppar",
 <<<<<<< HEAD:labm8/py/BUILD
         ":test",
+<<<<<<< HEAD:labm8/py/BUILD
         "//labm8/py/test_data/ppar:protos_pb_py",
 =======
         "//labm8:test",
         "//labm8/data/test/ppar:protos_py_pb2",
         "//third_party/py/absl",
 >>>>>>> ad2622a47... Port tests to //labm8:test.:labm8/BUILD
+=======
+        "//labm8/test_data/ppar:protos_pb_py",
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
         "//third_party/py/progressbar",
     ],
 )
@@ -847,6 +907,7 @@ py_test(
     deps = [
         ":sqlutil",
         ":test",
+<<<<<<< HEAD:labm8/py/BUILD
         "//labm8/py/test_data:test_protos_pb_py",
 =======
     default_python_version = "PY3",
@@ -861,6 +922,9 @@ py_test(
 >>>>>>> 4a3afd109... Add a CreateEngine() function.:labm8/BUILD
 =======
 >>>>>>> ad2622a47... Port tests to //labm8:test.:labm8/BUILD
+=======
+        "//labm8/test_data:test_protos_pb_py",
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/BUILD
     ],
 )
 

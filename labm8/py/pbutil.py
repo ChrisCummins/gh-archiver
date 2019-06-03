@@ -12,18 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Utility code for working with Protocol Buffers."""
-import collections
-import gzip
 import json
+<<<<<<< HEAD:labm8/py/pbutil.py
 import pathlib
 import subprocess
 import typing
 <<<<<<< HEAD:labm8/py/pbutil.py
 =======
+=======
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/pbutil.py
 
+import collections
 import google.protobuf.json_format
 import google.protobuf.message
 import google.protobuf.text_format
+<<<<<<< HEAD:labm8/py/pbutil.py
 from phd.lib.labm8 import jsonutil
 >>>>>>> 1eed6e90b... Automated code format.:lib/labm8/pbutil.py
 
@@ -34,6 +37,12 @@ import google.protobuf.text_format
 =======
 from labm8 import jsonutil
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
+=======
+import gzip
+import pathlib
+import subprocess
+import typing
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/pbutil.py
 
 # A type alias for annotating methods which take or return protocol buffers.
 ProtocolBuffer = typing.Any
@@ -309,7 +318,11 @@ def ToFile(
   return message
 
 
+<<<<<<< HEAD:labm8/py/pbutil.py
 def ToJson(message: ProtocolBuffer) -> "jsonutil.JSON":
+=======
+def ToJson(message: ProtocolBuffer) -> 'jsonutil.JSON':
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/pbutil.py
   """Return a JSON encoded representation of a protocol buffer.
 
   Args:
@@ -340,6 +353,7 @@ def _TruncatedString(string: str, n: int = 80) -> str:
 
 
 <<<<<<< HEAD:labm8/py/pbutil.py
+<<<<<<< HEAD:labm8/py/pbutil.py
 def _TruncateDictionaryStringValues(
   data: "jsonutil.JSON", n: int = 62,
 ) -> "jsonutil.JSON":
@@ -347,6 +361,10 @@ def _TruncateDictionaryStringValues(
 def _TruncateDictionaryStringValues(data: jsonutil.JSON,
                                     n: int = 62) -> jsonutil.JSON:
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
+=======
+def _TruncateDictionaryStringValues(data: 'jsonutil.JSON',
+                                    n: int = 62) -> 'jsonutil.JSON':
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/pbutil.py
   """Truncate all string values in a nested dictionary.
 
   Args:
@@ -377,6 +395,7 @@ def PrettyPrintJson(message: ProtocolBuffer, truncate: int = 52) -> str:
     JSON string.
   """
   data = ToJson(message)
+<<<<<<< HEAD:labm8/py/pbutil.py
   return json.dumps(
 <<<<<<< HEAD:labm8/py/pbutil.py
     _TruncateDictionaryStringValues(data) if truncate else data,
@@ -388,6 +407,11 @@ def PrettyPrintJson(message: ProtocolBuffer, truncate: int = 52) -> str:
       indent=2,
       sort_keys=True)
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
+=======
+  return json.dumps(_TruncateDictionaryStringValues(data) if truncate else data,
+                    indent=2,
+                    sort_keys=True)
+>>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/pbutil.py
 
 
 def RaiseIfNotSet(
