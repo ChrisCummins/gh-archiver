@@ -61,13 +61,17 @@ message BuildInfo {
   required string user = 3;
 
 <<<<<<< HEAD:config.proto
+<<<<<<< HEAD:config.proto
 =======
   required string git_hash = 4;
 >>>>>>> 223ffbb65... Add a build info proto.:config/proto/config.proto
+=======
+>>>>>>> 996b7e72c... Move config and build_info to top level package.:config.proto
   required bool repo_dirty = 5;
 
   // Git branch and remote are only available if on and tracking a git branch,
   // respectively.
+<<<<<<< HEAD:config.proto
 <<<<<<< HEAD:config.proto
   required string git_commit = 4;
   optional string git_branch = 6;
@@ -87,6 +91,11 @@ message BuildInfo {
   optional string git_commut_url = 9;
 >>>>>>> 223ffbb65... Add a build info proto.:config/proto/config.proto
 =======
+=======
+  required string git_commit = 4;
+  optional string git_branch = 6;
+  optional string git_tracking = 7;
+>>>>>>> 996b7e72c... Move config and build_info to top level package.:config.proto
   optional string git_remote_url = 8;
 
   optional string git_commit_author = 10;

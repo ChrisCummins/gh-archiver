@@ -19,17 +19,29 @@ global configuration of the repository. The configuration schema is defined in
 script.
 """
 import os
+
+import config_pb2
 import pathlib
 
+<<<<<<< HEAD:getconfig.py
 import config_pb2
 import config_pbtxt_py
 
 from labm8.py import pbutil
+=======
+from labm8 import pbutil
+>>>>>>> 996b7e72c... Move config and build_info to top level package.:getconfig.py
+
 
 # The path of the generated config file, which is //config.pbtxt.
 GLOBAL_CONFIG_PATH = pathlib.Path(
+<<<<<<< HEAD:getconfig.py
   pathlib.Path(os.path.dirname(os.path.realpath(__file__))) / "config.pbtxt"
 ).absolute()
+=======
+    pathlib.Path(os.path.dirname(os.path.realpath(__file__))) /
+    'config.pbtxt').absolute()
+>>>>>>> 996b7e72c... Move config and build_info to top level package.:getconfig.py
 
 
 class ConfigNotFound(EnvironmentError):

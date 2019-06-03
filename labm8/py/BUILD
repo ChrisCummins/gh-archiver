@@ -19,10 +19,16 @@ py_library(
     srcs = ["app.py"],
     visibility = ["//visibility:public"],
     deps = [
+<<<<<<< HEAD:labm8/py/BUILD
         ":shell",
         "//:build_info",
         "//labm8/py/internal:flags_parsers",
         "//labm8/py/internal:logging",
+=======
+        "//:build_info",
+        "//labm8/internal:flags_parsers",
+        "//labm8/internal:logging",
+>>>>>>> 996b7e72c... Move config and build_info to top level package.:labm8/BUILD
         "//third_party/py/absl",
     ],
 )
@@ -85,10 +91,13 @@ py_library(
     deps = [
         ":archive",
 <<<<<<< HEAD:labm8/py/BUILD
+<<<<<<< HEAD:labm8/py/BUILD
         ":fs",
 =======
         "//config:getconfig",
 >>>>>>> 0e24e1d99... Add a labm8.bazelutil.DataArchive class.:labm8/BUILD
+=======
+>>>>>>> 996b7e72c... Move config and build_info to top level package.:labm8/BUILD
     ],
 )
 
