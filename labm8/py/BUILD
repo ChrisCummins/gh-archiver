@@ -1085,3 +1085,9 @@ py_test(
 >>>>>>> ad2622a47... Port tests to //labm8:test.:labm8/BUILD
     ],
 )
+
+py_binary(
+    name = "EXPORT",
+    srcs = ["EXPORT.py"],
+    deps = ["//tools/source_tree:export_source_tree"],
+)
