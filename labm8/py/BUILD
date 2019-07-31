@@ -1105,3 +1105,9 @@ py_binary(
     srcs = ["EXPORT.py"],
     deps = ["//tools/source_tree:export_source_tree"],
 )
+
+py_binary(
+    name = "DEPLOY",
+    srcs = ["DEPLOY.py"],
+    deps = ["//tools/source_tree:deploy"],
+)
