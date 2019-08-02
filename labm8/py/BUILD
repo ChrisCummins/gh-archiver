@@ -375,7 +375,9 @@ py_test(
     visibility = ["//visibility:public"],
     deps = [
         ":dockerutil",
+        ":system",
         ":test",
+        "//third_party/py/pytest",
     ],
 )
 
