@@ -306,7 +306,11 @@ def get_module_object_and_name(globals_dict):
   name = globals_dict.get("__name__", None)
   module = sys.modules.get(name, None)
   # Pick a more informative name for the main module.
+<<<<<<< HEAD:labm8/py/app.py
   return module, (sys.argv[0] if name == "__main__" else name)
+=======
+  return module, (sys.argv[0] if name == '__main__' else name)
+>>>>>>> 5dd425390... Use argv[0] as script name in help.:labm8/app.py
 
 
 def get_calling_module_name():
