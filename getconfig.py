@@ -21,27 +21,15 @@ script.
 import os
 
 import config_pb2
+import config_pbtxt
 import pathlib
 
-<<<<<<< HEAD:getconfig.py
-import config_pb2
-import config_pbtxt_py
-
-from labm8.py import pbutil
-=======
 from labm8 import pbutil
->>>>>>> 996b7e72c... Move config and build_info to top level package.:getconfig.py
-
 
 # The path of the generated config file, which is //config.pbtxt.
 GLOBAL_CONFIG_PATH = pathlib.Path(
-<<<<<<< HEAD:getconfig.py
-  pathlib.Path(os.path.dirname(os.path.realpath(__file__))) / "config.pbtxt"
-).absolute()
-=======
     pathlib.Path(os.path.dirname(os.path.realpath(__file__))) /
     'config.pbtxt').absolute()
->>>>>>> 996b7e72c... Move config and build_info to top level package.:getconfig.py
 
 
 class ConfigNotFound(EnvironmentError):
@@ -56,7 +44,7 @@ class ConfigNotFound(EnvironmentError):
     self.path = path
 
   def __repr__(self):
-    return f"GlobalConfig file {self.path} not found"
+    return f'GlobalConfig file {self.path} not found'
 
   def __str__(self):
     return self.__repr__()
@@ -76,11 +64,9 @@ class CorruptConfig(EnvironmentError):
     self.original_exception = original_exception
 
   def __repr__(self):
-    return (
-      f"GlobalConfig file could not be parsed.\n"
-      f"Original error: {self.original_exception}\n"
-      f"Config: {self.config_proto_as_string}"
-    )
+    return (f'GlobalConfig file could not be parsed.\n'
+            f'Original error: {self.original_exception}\n'
+            f'Config: {self.config_proto_as_string}')
 
   def __str__(self):
     return self.__repr__()
@@ -96,9 +82,7 @@ def GetGlobalConfig() -> config_pb2.GlobalConfig:
     CorruptConfig: In case the configuration file could not be parsed.
   """
   try:
-    config = pbutil.FromString(
-      config_pbtxt_py.STRING, config_pb2.GlobalConfig()
-    )
+    config = pbutil.FromString(config_pbtxt.STRING, config_pb2.GlobalConfig())
   except pbutil.DecodeError as e:
-    raise CorruptConfig(config_pbtxt_py.STRING, e)
+    raise CorruptConfig(config_pbtxt.STRING, e)
   return config
