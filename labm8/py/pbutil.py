@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Utility code for working with Protocol Buffers."""
+<<<<<<< HEAD:labm8/py/pbutil.py
 import json
 <<<<<<< HEAD:labm8/py/pbutil.py
 import pathlib
@@ -38,11 +39,19 @@ import google.protobuf.text_format
 from labm8 import jsonutil
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
 =======
+=======
+import collections
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
 import gzip
+import json
 import pathlib
 import subprocess
 import typing
 >>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/pbutil.py
+
+import google.protobuf.json_format
+import google.protobuf.message
+import google.protobuf.text_format
 
 # A type alias for annotating methods which take or return protocol buffers.
 ProtocolBuffer = typing.Any
@@ -97,23 +106,35 @@ def FromString(
 class ProtoWorkerTimeoutError(subprocess.CalledProcessError):
   """Raised is a protobuf worker binary times out."""
 
-  def __init__(self, cmd: typing.List[str], timeout_seconds: int,
-               returncode: int):
+  def __init__(
+      self,
+      cmd: typing.List[str],
+      timeout_seconds: int,
+      returncode: int,
+  ):
     self.cmd = cmd
     self.timeout_seconds = timeout_seconds
     # subprocess.CalledProcessError.str() requires a returncode attribute.
     self.returncode = returncode
 
   def __repr__(self) -> str:
-    return (f"Proto worker timeout after {self.timeout_seconds} "
+    return (f'Proto worker timeout after {self.timeout_seconds} '
             f"seconds: {' '.join(self.cmd)}")
 
 
+<<<<<<< HEAD:labm8/py/pbutil.py
 >>>>>>> 8c6ea2b4d... Add timeout support for cldrive.:labm8/pbutil.py
 def FromString(string: str,
                message: ProtocolBuffer,
                uninitialized_okay: bool = False) -> ProtocolBuffer:
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
+=======
+def FromString(
+    string: str,
+    message: ProtocolBuffer,
+    uninitialized_okay: bool = False,
+) -> ProtocolBuffer:
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   """Read a text format protocol buffer from a string.
 
   Args:
@@ -136,7 +157,7 @@ def FromString(string: str,
     raise DecodeError(e)
 
   if not uninitialized_okay and not message.IsInitialized():
-    raise DecodeError(f"Required fields not set")
+    raise DecodeError(f'Required fields not set')
 
   return message
 
@@ -152,8 +173,13 @@ def FromFile(
     path: pathlib.Path,
     message: ProtocolBuffer,
     assume_filename: typing.Optional[typing.Union[str, pathlib.Path]] = None,
+<<<<<<< HEAD:labm8/py/pbutil.py
     uninitialized_okay: bool = False) -> ProtocolBuffer:
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
+=======
+    uninitialized_okay: bool = False,
+) -> ProtocolBuffer:
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   """Read a protocol buffer from a file.
 
   This method uses attempts to guess the encoding from the path suffix,
@@ -192,12 +218,18 @@ def FromFile(
     else:
       raise FileNotFoundError(f"File not found: '{path}'")
 
+<<<<<<< HEAD:labm8/py/pbutil.py
   suffixes = (
     pathlib.Path(assume_filename,).suffixes
     if assume_filename
     else path.suffixes
   )
   if suffixes and suffixes[-1] == ".gz":
+=======
+  suffixes = pathlib.Path(
+      assume_filename,).suffixes if assume_filename else path.suffixes
+  if suffixes and suffixes[-1] == '.gz':
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
     suffixes.pop()
     open_function = gzip.open
   else:
@@ -215,8 +247,13 @@ def FromFile(
       else:
         message.ParseFromString(f.read())
   except (
+<<<<<<< HEAD:labm8/py/pbutil.py
     google.protobuf.text_format.ParseError,
     google.protobuf.json_format.ParseError,
+=======
+      google.protobuf.text_format.ParseError,
+      google.protobuf.json_format.ParseError,
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   ) as e:
     # The exception raised during parsing depends on the message format. Catch
     # them all under a single DecodeError exception type.
@@ -238,8 +275,12 @@ def ToFile(
     message: ProtocolBuffer,
     path: pathlib.Path,
     exist_ok: bool = True,
+<<<<<<< HEAD:labm8/py/pbutil.py
     assume_filename: typing.Optional[typing.Union[str, pathlib.Path]] = None
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
+=======
+    assume_filename: typing.Optional[typing.Union[str, pathlib.Path]] = None,
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
 ) -> ProtocolBuffer:
   """Write a protocol buffer to a file.
 
@@ -285,12 +326,18 @@ def ToFile(
     class_name = type(message).__name__
     raise EncodeError(f"Required fields not set: '{class_name}'")
 
+<<<<<<< HEAD:labm8/py/pbutil.py
   suffixes = (
     pathlib.Path(assume_filename,).suffixes
     if assume_filename
     else path.suffixes
   )
   if suffixes and suffixes[-1] == ".gz":
+=======
+  suffixes = pathlib.Path(
+      assume_filename,).suffixes if assume_filename else path.suffixes
+  if suffixes and suffixes[-1] == '.gz':
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
     suffixes.pop()
     open_function = gzip.open
   else:
@@ -313,8 +360,14 @@ def ToFile(
     elif suffix == '.json':
       f.write(
           google.protobuf.json_format.MessageToJson(
+<<<<<<< HEAD:labm8/py/pbutil.py
               message, preserving_proto_field_name=True))
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
+=======
+              message,
+              preserving_proto_field_name=True,
+          ),)
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
     else:
       f.write(message.SerializeToString())
 
@@ -335,7 +388,12 @@ def ToJson(message: ProtocolBuffer) -> 'jsonutil.JSON':
     JSON encoded message.
   """
   return google.protobuf.json_format.MessageToDict(
+<<<<<<< HEAD:labm8/py/pbutil.py
     message, preserving_proto_field_name=True,
+=======
+      message,
+      preserving_proto_field_name=True,
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   )
 
 
@@ -357,6 +415,7 @@ def _TruncatedString(string: str, n: int = 80) -> str:
 
 <<<<<<< HEAD:labm8/py/pbutil.py
 <<<<<<< HEAD:labm8/py/pbutil.py
+<<<<<<< HEAD:labm8/py/pbutil.py
 def _TruncateDictionaryStringValues(
   data: "jsonutil.JSON", n: int = 62,
 ) -> "jsonutil.JSON":
@@ -368,6 +427,12 @@ def _TruncateDictionaryStringValues(data: jsonutil.JSON,
 def _TruncateDictionaryStringValues(data: 'jsonutil.JSON',
                                     n: int = 62) -> 'jsonutil.JSON':
 >>>>>>> bb562b8d7... Refresh labm8 for new deps.:labm8/pbutil.py
+=======
+def _TruncateDictionaryStringValues(
+    data: 'jsonutil.JSON',
+    n: int = 62,
+) -> 'jsonutil.JSON':
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   """Truncate all string values in a nested dictionary.
 
   Args:
@@ -409,6 +474,7 @@ def PrettyPrintJson(message: ProtocolBuffer, truncate: int = 52) -> str:
 =======
       _TruncateDictionaryStringValues(data) if truncate else data,
       indent=2,
+<<<<<<< HEAD:labm8/py/pbutil.py
       sort_keys=True)
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
 =======
@@ -426,6 +492,16 @@ def PrettyPrintJson(message: ProtocolBuffer, truncate: int = 52) -> str:
 
 def RaiseIfNotSet(
   proto: ProtocolBuffer, field: str, err: ValueError,
+=======
+      sort_keys=True,
+  )
+
+
+def RaiseIfNotSet(
+    proto: ProtocolBuffer,
+    field: str,
+    err: ValueError,
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
 ) -> typing.Any:
   """Check that a proto field is set before returning it.
 
@@ -448,7 +524,12 @@ def RaiseIfNotSet(
 
 
 def ProtoIsReadable(
+<<<<<<< HEAD:labm8/py/pbutil.py
   path: typing.Union[str, pathlib.Path], message: ProtocolBuffer,
+=======
+    path: typing.Union[str, pathlib.Path],
+    message: ProtocolBuffer,
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
 ) -> bool:
   """Return whether a file is a readable protocol buffer.
 
@@ -468,6 +549,7 @@ def ProtoIsReadable(
 
 
 <<<<<<< HEAD:labm8/py/pbutil.py
+<<<<<<< HEAD:labm8/py/pbutil.py
 def AssertFieldIsSet(
   proto: ProtocolBuffer, field_name: str, fail_message: str = None,
 ) -> typing.Optional[typing.Any]:
@@ -476,6 +558,13 @@ def AssertFieldIsSet(proto: ProtocolBuffer,
                      field_name: str,
                      fail_message: str = None) -> typing.Optional[typing.Any]:
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
+=======
+def AssertFieldIsSet(
+    proto: ProtocolBuffer,
+    field_name: str,
+    fail_message: str = None,
+) -> typing.Optional[typing.Any]:
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   """Assert that protocol buffer field is set.
 
   Args:
@@ -497,6 +586,7 @@ def AssertFieldIsSet(proto: ProtocolBuffer,
   if not proto.HasField(field_name):
     proto_class_name = type(proto).__name__
 <<<<<<< HEAD:labm8/py/pbutil.py
+<<<<<<< HEAD:labm8/py/pbutil.py
     raise ProtoValueError(
       fail_message or f"Field not set: '{proto_class_name}.{field_name}'",
     )
@@ -504,6 +594,10 @@ def AssertFieldIsSet(proto: ProtocolBuffer,
     raise ProtoValueError(fail_message or
                           f"Field not set: '{proto_class_name}.{field_name}'")
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
+=======
+    raise ProtoValueError(
+        fail_message or f"Field not set: '{proto_class_name}.{field_name}'",)
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   return getattr(proto, field_name) if hasattr(proto, field_name) else None
 
 
@@ -518,8 +612,13 @@ def AssertFieldConstraint(
     proto: ProtocolBuffer,
     field_name: str,
     constraint: typing.Callable[[typing.Any], bool] = lambda x: True,
+<<<<<<< HEAD:labm8/py/pbutil.py
     fail_message: str = None) -> typing.Any:
 >>>>>>> 150d66672... Auto format files.:labm8/pbutil.py
+=======
+    fail_message: str = None,
+) -> typing.Any:
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   """Assert a constraint on the value of a protocol buffer field.
 
   Args:
@@ -544,13 +643,19 @@ def AssertFieldConstraint(
   if not constraint(value):
     proto_class_name = type(proto).__name__
     raise ProtoValueError(
+<<<<<<< HEAD:labm8/py/pbutil.py
       fail_message
       or f"Field fails constraint check: '{proto_class_name}.{field_name}'",
     )
+=======
+        fail_message or
+        f"Field fails constraint check: '{proto_class_name}.{field_name}'",)
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   else:
     return value
 
 
+<<<<<<< HEAD:labm8/py/pbutil.py
 <<<<<<< HEAD:labm8/py/pbutil.py
 <<<<<<< HEAD:labm8/py/pbutil.py
 def RunProcessMessage(
@@ -593,6 +698,14 @@ def RunProcessMessage(cmd: typing.List[str],
                       timeout_seconds: int = 360,
                       env: typing.Dict[str, str] = None) -> str:
 >>>>>>> 19647f430... Switch to batched corpus export.:labm8/pbutil.py
+=======
+def RunProcessMessage(
+    cmd: typing.List[str],
+    input_proto: ProtocolBuffer,
+    timeout_seconds: int = 360,
+    env: typing.Dict[str, str] = None,
+) -> str:
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   # Run the C++ worker process, capturing it's output.
 <<<<<<< HEAD:labm8/py/pbutil.py
 <<<<<<< HEAD:labm8/py/pbutil.py
@@ -614,8 +727,13 @@ def RunProcessMessage(cmd: typing.List[str],
 >>>>>>> 46c11566f... Actually enforce timeout.:labm8/pbutil.py
 =======
       stdout=subprocess.PIPE,
+<<<<<<< HEAD:labm8/py/pbutil.py
       env=env)
 >>>>>>> 19647f430... Switch to batched corpus export.:labm8/pbutil.py
+=======
+      env=env,
+  )
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   # Send the input proto to the C++ worker process.
   stdout, _ = process.communicate(input_proto.SerializeToString())
 
@@ -666,8 +784,15 @@ def RunProcessMessageToProto(
     raise ProtoWorkerTimeoutError(cmd=cmd, timeout_seconds=timeout_seconds)
 =======
     raise ProtoWorkerTimeoutError(
+<<<<<<< HEAD:labm8/py/pbutil.py
         cmd=cmd, timeout_seconds=timeout_seconds, returncode=process.returncode)
 >>>>>>> fddfd9315... Add a returncode attribute.:labm8/pbutil.py
+=======
+        cmd=cmd,
+        timeout_seconds=timeout_seconds,
+        returncode=process.returncode,
+    )
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   elif process.returncode:
     raise subprocess.CalledProcessError(process.returncode, cmd)
 >>>>>>> 8c6ea2b4d... Add timeout support for cldrive.:labm8/pbutil.py
@@ -699,6 +824,7 @@ def RunProcessMessageInPlace(cmd: typing.List[str],
   return stdout
 
 
+<<<<<<< HEAD:labm8/py/pbutil.py
 def RunProcessMessageToProto(cmd: typing.List[str],
 >>>>>>> 7b7ab9b19... Work in progress on CSV output.:labm8/pbutil.py
                              input_proto: ProtocolBuffer,
@@ -756,17 +882,32 @@ def RunProcessMessageToProto(cmd: typing.List[str],
 =======
                              timeout_seconds: int = 360,
                              env: typing.Dict[str, str] = None):
+=======
+def RunProcessMessageToProto(
+    cmd: typing.List[str],
+    input_proto: ProtocolBuffer,
+    output_proto: ProtocolBuffer,
+    timeout_seconds: int = 360,
+    env: typing.Dict[str, str] = None,
+):
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   stdout = RunProcessMessage(
-      cmd, input_proto, timeout_seconds=timeout_seconds, env=env)
+      cmd,
+      input_proto,
+      timeout_seconds=timeout_seconds,
+      env=env,
+  )
   output_proto.ParseFromString(stdout)
 >>>>>>> 19647f430... Switch to batched corpus export.:labm8/pbutil.py
   return output_proto
 
 
-def RunProcessMessageInPlace(cmd: typing.List[str],
-                             input_proto: ProtocolBuffer,
-                             timeout_seconds: int = 360,
-                             env: typing.Dict[str, str] = None):
+def RunProcessMessageInPlace(
+    cmd: typing.List[str],
+    input_proto: ProtocolBuffer,
+    timeout_seconds: int = 360,
+    env: typing.Dict[str, str] = None,
+):
   input_proto.ParseFromString(
 <<<<<<< HEAD:labm8/py/pbutil.py
 <<<<<<< HEAD:labm8/py/pbutil.py
@@ -780,8 +921,16 @@ def RunProcessMessageInPlace(cmd: typing.List[str],
 >>>>>>> 19647f430... Switch to batched corpus export.:labm8/pbutil.py
 =======
       RunProcessMessage(
+<<<<<<< HEAD:labm8/py/pbutil.py
           cmd, input_proto, timeout_seconds=timeout_seconds, env=env))
 >>>>>>> fddfd9315... Add a returncode attribute.:labm8/pbutil.py
+=======
+          cmd,
+          input_proto,
+          timeout_seconds=timeout_seconds,
+          env=env,
+      ),)
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
   return input_proto
 
 
@@ -816,6 +965,7 @@ class ProtoBackedMixin(object):
     # ABSTRACT METHOD. Inheriting classes must implement!
     raise NotImplementedError(
 <<<<<<< HEAD:labm8/py/pbutil.py
+<<<<<<< HEAD:labm8/py/pbutil.py
       f"{type(self).__name__}.SetProto() not implemented",
     )
 
@@ -823,6 +973,9 @@ class ProtoBackedMixin(object):
   def FromProto(cls, proto: ProtocolBuffer) -> "ProtoBackedMixin":
 =======
         f'{type(self).__name__}.SetProto() not implemented')
+=======
+        f'{type(self).__name__}.SetProto() not implemented',)
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
 
   @classmethod
 <<<<<<< HEAD:labm8/py/pbutil.py
@@ -845,11 +998,15 @@ class ProtoBackedMixin(object):
     # ABSTRACT METHOD. Inheriting classes must implement!
     raise NotImplementedError(
 <<<<<<< HEAD:labm8/py/pbutil.py
+<<<<<<< HEAD:labm8/py/pbutil.py
       f"{type(self).__name__}.FromProto() not implemented",
     )
 =======
         f'{type(self).__name__}.FromProto() not implemented')
 >>>>>>> 223437295... Add ProtoBackedMixin for classes.:labm8/pbutil.py
+=======
+        f'{type(self).__name__}.FromProto() not implemented',)
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/pbutil.py
 
   def ToProto(self) -> ProtocolBuffer:
     """Serialize the instance to protocol buffer.

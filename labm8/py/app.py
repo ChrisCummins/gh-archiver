@@ -22,7 +22,10 @@ import re
 import sys
 from typing import Any
 from typing import Callable
+<<<<<<< HEAD:labm8/py/app.py
 from typing import Dict
+=======
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
 from typing import List
 from typing import Optional
 from typing import Union
@@ -38,6 +41,7 @@ from labm8.py.internal import logging
 FLAGS = absl_flags.FLAGS
 
 absl_flags.DEFINE_boolean(
+<<<<<<< HEAD:labm8/py/app.py
   "version", False, "Print version information and exit.",
 )
 absl_flags.DEFINE_boolean(
@@ -60,6 +64,12 @@ absl_flags.DEFINE_boolean(
 #   def LogFoo():
 #     app.Log(1, "Foo")
 skip_log_prefix = absl_logging.skip_log_prefix
+=======
+    'version',
+    False,
+    'Print version information and exit.',
+)
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
 
 
 class UsageError(absl_app.UsageError):
@@ -85,6 +95,7 @@ def AssertOrRaise(
 
 def GetVersionInformationString() -> str:
   """Return a string of version information, as printed by --version flag."""
+<<<<<<< HEAD:labm8/py/app.py
   # If this is a bazel environment, then the //:build_info package will be
   # available. However, if this is a labm8 pip package install, then
   # //:build_info will not be available, so use pkg_resources to get the
@@ -112,6 +123,18 @@ def GetVersionInformationString() -> str:
 
 def RunWithArgs(
   main: Callable[[List[str]], None], argv: Optional[List[str]] = None,
+=======
+  return '\n'.join([
+      build_info.FormatShortBuildDescription(),
+      'Copyright (C) 2014-2019 Chris Cummins <chrisc.101@gmail.com>',
+      f'<{build_info.GetGithubCommitUrl()}>',
+  ])
+
+
+def RunWithArgs(
+    main: Callable[[List[str]], None],
+    argv: Optional[List[str]] = None,
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
 ):
   """Begin executing the program.
 
@@ -338,6 +361,7 @@ def get_calling_module_name():
 # TODO(cec): Add validator callbacks.
 
 
+<<<<<<< HEAD:labm8/py/app.py
 def FlagsToDict(json_safe: bool = False) -> Dict[str, Any]:
   """Return a dictionary of flags and their values.
 
@@ -389,6 +413,21 @@ def DEFINE_string(
   """Registers a flag whose value can be any string."""
   absl_flags.DEFINE_string(
     name, default, help, module_name=get_calling_module_name(),
+=======
+def DEFINE_string(
+    name: str,
+    default: Optional[str],
+    help: str,
+    required: bool = False,
+    validator: Callable[[str], bool] = None,
+):
+  """Registers a flag whose value can be any string."""
+  absl_flags.DEFINE_string(
+      name,
+      default,
+      help,
+      module_name=get_calling_module_name(),
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
   )
   if required:
     absl_flags.mark_flag_as_required(name)
@@ -397,6 +436,7 @@ def DEFINE_string(
 
 
 def DEFINE_integer(
+<<<<<<< HEAD:labm8/py/app.py
   name: str,
   default: Optional[int],
   help: str,
@@ -413,6 +453,24 @@ def DEFINE_integer(
     module_name=get_calling_module_name(),
     lower_bound=lower_bound,
     upper_bound=upper_bound,
+=======
+    name: str,
+    default: Optional[int],
+    help: str,
+    required: bool = False,
+    lower_bound: Optional[int] = None,
+    upper_bound: Optional[int] = None,
+    validator: Callable[[int], bool] = None,
+):
+  """Registers a flag whose value must be an integer."""
+  absl_flags.DEFINE_integer(
+      name,
+      default,
+      help,
+      module_name=get_calling_module_name(),
+      lower_bound=lower_bound,
+      upper_bound=upper_bound,
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
   )
   if required:
     absl_flags.mark_flag_as_required(name)
@@ -421,6 +479,7 @@ def DEFINE_integer(
 
 
 def DEFINE_float(
+<<<<<<< HEAD:labm8/py/app.py
   name: str,
   default: Optional[float],
   help: str,
@@ -437,6 +496,24 @@ def DEFINE_float(
     module_name=get_calling_module_name(),
     lower_bound=lower_bound,
     upper_bound=upper_bound,
+=======
+    name: str,
+    default: Optional[float],
+    help: str,
+    required: bool = False,
+    lower_bound: Optional[float] = None,
+    upper_bound: Optional[float] = None,
+    validator: Callable[[float], bool] = None,
+):
+  """Registers a flag whose value must be a float."""
+  absl_flags.DEFINE_float(
+      name,
+      default,
+      help,
+      module_name=get_calling_module_name(),
+      lower_bound=lower_bound,
+      upper_bound=upper_bound,
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
   )
   if required:
     absl_flags.mark_flag_as_required(name)
@@ -445,6 +522,7 @@ def DEFINE_float(
 
 
 def DEFINE_boolean(
+<<<<<<< HEAD:labm8/py/app.py
   name: str,
   default: Optional[bool],
   help: str,
@@ -454,6 +532,20 @@ def DEFINE_boolean(
   """Registers a flag whose value must be a boolean."""
   absl_flags.DEFINE_boolean(
     name, default, help, module_name=get_calling_module_name(),
+=======
+    name: str,
+    default: Optional[bool],
+    help: str,
+    required: bool = False,
+    validator: Callable[[bool], bool] = None,
+):
+  """Registers a flag whose value must be a boolean."""
+  absl_flags.DEFINE_boolean(
+      name,
+      default,
+      help,
+      module_name=get_calling_module_name(),
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
   )
   if required:
     absl_flags.mark_flag_as_required(name)
@@ -462,6 +554,7 @@ def DEFINE_boolean(
 
 
 def DEFINE_list(
+<<<<<<< HEAD:labm8/py/app.py
   name: str,
   default: Optional[List[Any]],
   help: str,
@@ -471,6 +564,20 @@ def DEFINE_list(
   """Registers a flag whose value must be a list."""
   absl_flags.DEFINE_list(
     name, default, help, module_name=get_calling_module_name(),
+=======
+    name: str,
+    default: Optional[List[Any]],
+    help: str,
+    required: bool = False,
+    validator: Callable[[List[Any]], bool] = None,
+):
+  """Registers a flag whose value must be a list."""
+  absl_flags.DEFINE_list(
+      name,
+      default,
+      help,
+      module_name=get_calling_module_name(),
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
   )
   if required:
     absl_flags.mark_flag_as_required(name)
@@ -482,12 +589,21 @@ def DEFINE_list(
 
 
 def DEFINE_input_path(
+<<<<<<< HEAD:labm8/py/app.py
   name: str,
   default: Union[None, str, pathlib.Path],
   help: str,
   required: bool = False,
   is_dir: bool = False,
   validator: Callable[[pathlib.Path], bool] = None,
+=======
+    name: str,
+    default: Union[None, str, pathlib.Path],
+    help: str,
+    required: bool = False,
+    is_dir: bool = False,
+    validator: Callable[[pathlib.Path], bool] = None,
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
 ):
   """Registers a flag whose value is an input path.
 
@@ -506,6 +622,7 @@ def DEFINE_input_path(
   parser = flags_parsers.PathParser(must_exist=True, is_dir=is_dir)
   serializer = absl_flags.ArgumentSerializer()
   absl_flags.DEFINE(
+<<<<<<< HEAD:labm8/py/app.py
     parser,
     name,
     default,
@@ -513,6 +630,15 @@ def DEFINE_input_path(
     absl_flags.FLAGS,
     serializer,
     module_name=get_calling_module_name(),
+=======
+      parser,
+      name,
+      default,
+      help,
+      absl_flags.FLAGS,
+      serializer,
+      module_name=get_calling_module_name(),
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
   )
   if required:
     absl_flags.mark_flag_as_required(name)
@@ -521,6 +647,7 @@ def DEFINE_input_path(
 
 
 def DEFINE_output_path(
+<<<<<<< HEAD:labm8/py/app.py
   name: str,
   default: Union[None, str, pathlib.Path],
   help: str,
@@ -529,6 +656,16 @@ def DEFINE_output_path(
   exist_ok: bool = True,
   must_exist: bool = False,
   validator: Callable[[pathlib.Path], bool] = None,
+=======
+    name: str,
+    default: Union[None, str, pathlib.Path],
+    help: str,
+    required: bool = False,
+    is_dir: bool = False,
+    exist_ok: bool = True,
+    must_exist: bool = False,
+    validator: Callable[[pathlib.Path], bool] = None,
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
 ):
   """Registers a flag whose value is an output path.
 
@@ -550,6 +687,7 @@ def DEFINE_output_path(
     must_exist: If True, require that the path exists, else parsing will fail.
   """
   parser = flags_parsers.PathParser(
+<<<<<<< HEAD:labm8/py/app.py
     must_exist=must_exist, exist_ok=exist_ok, is_dir=is_dir,
   )
   serializer = absl_flags.ArgumentSerializer()
@@ -561,6 +699,21 @@ def DEFINE_output_path(
     absl_flags.FLAGS,
     serializer,
     module_name=get_calling_module_name(),
+=======
+      must_exist=must_exist,
+      exist_ok=exist_ok,
+      is_dir=is_dir,
+  )
+  serializer = absl_flags.ArgumentSerializer()
+  absl_flags.DEFINE(
+      parser,
+      name,
+      default,
+      help,
+      absl_flags.FLAGS,
+      serializer,
+      module_name=get_calling_module_name(),
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
   )
   if required:
     absl_flags.mark_flag_as_required(name)
@@ -569,12 +722,21 @@ def DEFINE_output_path(
 
 
 def DEFINE_database(
+<<<<<<< HEAD:labm8/py/app.py
   name: str,
   database_class,
   default: Optional[str],
   help: str,
   must_exist: bool = False,
   validator: Callable[[Any], bool] = None,
+=======
+    name: str,
+    database_class,
+    default: Optional[str],
+    help: str,
+    must_exist: bool = False,
+    validator: Callable[[Any], bool] = None,
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
 ):
   """Registers a flag whose value is a sqlutil.Database class.
 
@@ -595,6 +757,7 @@ def DEFINE_database(
   parser = flags_parsers.DatabaseParser(database_class, must_exist=must_exist)
   serializer = absl_flags.ArgumentSerializer()
   absl_flags.DEFINE(
+<<<<<<< HEAD:labm8/py/app.py
     parser,
     name,
     default,
@@ -602,11 +765,21 @@ def DEFINE_database(
     absl_flags.FLAGS,
     serializer,
     module_name=get_calling_module_name(),
+=======
+      parser,
+      name,
+      default,
+      help,
+      absl_flags.FLAGS,
+      serializer,
+      module_name=get_calling_module_name(),
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
   )
   if validator:
     RegisterFlagValidator(name, validator)
 
 
+<<<<<<< HEAD:labm8/py/app.py
 def DEFINE_enum(
   name: str,
   enum_class,
@@ -650,6 +823,12 @@ def RegisterFlagValidator(
   flag_name: str,
   checker: Callable[[Any], bool],
   message: str = "Flag validation failed",
+=======
+def RegisterFlagValidator(
+    flag_name: str,
+    checker: Callable[[Any], bool],
+    message: str = 'Flag validation failed',
+>>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
 ):
   """Adds a constraint, which will be enforced during program execution.
 
