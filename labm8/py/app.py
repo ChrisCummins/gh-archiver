@@ -15,11 +15,15 @@
 
 See: <https://github.com/abseil/abseil-py>
 """
+import sys
+
 import functools
 import json
 import pathlib
 import re
-import sys
+from absl import app as absl_app
+from absl import flags as absl_flags
+from absl import logging as absl_logging
 from typing import Any
 from typing import Callable
 <<<<<<< HEAD:labm8/py/app.py
@@ -30,6 +34,7 @@ from typing import List
 from typing import Optional
 from typing import Union
 
+<<<<<<< HEAD:labm8/py/app.py
 from absl import app as absl_app
 from absl import flags as absl_flags
 from absl import logging as absl_logging
@@ -37,6 +42,11 @@ from absl import logging as absl_logging
 from labm8.py import shell
 from labm8.py.internal import flags_parsers
 from labm8.py.internal import logging
+=======
+import build_info
+from labm8.internal import flags_parsers
+from labm8.internal import logging
+>>>>>>> 662ce8651... Add version string to `--version` output.:labm8/app.py
 
 FLAGS = absl_flags.FLAGS
 
@@ -125,6 +135,7 @@ def RunWithArgs(
   main: Callable[[List[str]], None], argv: Optional[List[str]] = None,
 =======
   return '\n'.join([
+      build_info.FormatVersion(),
       build_info.FormatShortBuildDescription(),
       'Copyright (C) 2014-2019 Chris Cummins <chrisc.101@gmail.com>',
       f'<{build_info.GetGithubCommitUrl()}>',
