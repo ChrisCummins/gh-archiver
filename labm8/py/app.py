@@ -44,6 +44,7 @@ from labm8.py.internal import flags_parsers
 from labm8.py.internal import logging
 =======
 import build_info
+from labm8 import shell
 from labm8.internal import flags_parsers
 from labm8.internal import logging
 >>>>>>> 662ce8651... Add version string to `--version` output.:labm8/app.py
@@ -79,7 +80,11 @@ skip_log_prefix = absl_logging.skip_log_prefix
     False,
     'Print version information and exit.',
 )
+<<<<<<< HEAD:labm8/py/app.py
 >>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
+=======
+absl_flags.DEFINE_boolean('log_colors', True, 'Whether to colorize logging output.')
+>>>>>>> a7c52c85d... Conditionally format logging output with colors.:labm8/app.py
 
 
 class UsageError(absl_app.UsageError):
@@ -222,6 +227,15 @@ def _MaybeColorizeLog(color: str, msg: str, *args) -> str:
     return string
 
 
+def _MaybeColorizeLog(color: str, msg: str, *args) -> str:
+  """Conditionally apply shell colorization to the given format string."""
+  string = msg % args
+  if FLAGS.log_colors:
+    return f"{shell.ShellEscapeCodes.BOLD}{color}{string}{shell.ShellEscapeCodes.END}"
+  else:
+    return string
+
+
 # Skip this function when determining the calling module and line number for
 # logging.
 @skip_log_prefix
@@ -234,6 +248,7 @@ def Log(level: int, msg, *args, **kwargs):
     "filename base (that is, name ignoring .py). <log level> overrides any "
     "value given by --v."
   """
+<<<<<<< HEAD:labm8/py/app.py
   logging.Log(
     logging.GetCallingModuleName(),
     level,
@@ -246,43 +261,69 @@ def Log(level: int, msg, *args, **kwargs):
     ),
     **kwargs,
   )
+=======
+  calling_module = logging.GetCallingModuleName()
+  logging.Log(calling_module, level, _MaybeColorizeLog(
+      shell.ShellEscapeCodes.YELLOW if level > 1 else shell.ShellEscapeCodes.CYAN,
+      msg, *args), **kwargs)
+>>>>>>> a7c52c85d... Conditionally format logging output with colors.:labm8/app.py
 
 
 @skip_log_prefix
 def LogIf(level: int, condition, msg, *args, **kwargs):
   if condition:
+<<<<<<< HEAD:labm8/py/app.py
+=======
+    calling_module = logging.GetCallingModuleName()
+>>>>>>> a7c52c85d... Conditionally format logging output with colors.:labm8/app.py
     Log(level, msg, *args, **kwargs)
 
 
 @skip_log_prefix
 def Fatal(msg, *args, **kwargs):
   """Logs a fatal message."""
+<<<<<<< HEAD:labm8/py/app.py
   logging.Fatal(
     _MaybeColorizeLog(shell.ShellEscapeCodes.RED, msg, *args), **kwargs
   )
+=======
+  logging.Fatal(_MaybeColorizeLog(shell.ShellEscapeCodes.RED, msg, *args), **kwargs)
+>>>>>>> a7c52c85d... Conditionally format logging output with colors.:labm8/app.py
 
 
 @skip_log_prefix
 def FatalWithoutStackTrace(msg, *args, returncode: int = 1, **kwargs):
   """Logs a fatal message without stacktrace."""
   Error(msg, *args, **kwargs)
+<<<<<<< HEAD:labm8/py/app.py
   sys.exit(returncode)
+=======
+  sys.exit(1)
+>>>>>>> a7c52c85d... Conditionally format logging output with colors.:labm8/app.py
 
 
 @skip_log_prefix
 def Error(msg, *args, **kwargs):
   """Logs an error message."""
+<<<<<<< HEAD:labm8/py/app.py
   logging.Error(
     _MaybeColorizeLog(shell.ShellEscapeCodes.RED, msg, *args), **kwargs
   )
+=======
+  logging.Error(_MaybeColorizeLog(shell.ShellEscapeCodes.RED, msg, *args), **kwargs)
+>>>>>>> a7c52c85d... Conditionally format logging output with colors.:labm8/app.py
 
 
 @skip_log_prefix
 def Warning(msg, *args, **kwargs):
   """Logs a warning message."""
+<<<<<<< HEAD:labm8/py/app.py
   logging.Warning(
     _MaybeColorizeLog(shell.ShellEscapeCodes.RED, msg, *args), **kwargs
   )
+=======
+  logging.Warning(_MaybeColorizeLog(shell.ShellEscapeCodes.RED, msg, *args), **kwargs)
+>>>>>>> a7c52c85d... Conditionally format logging output with colors.:labm8/app.py
 
 
 def FlushLogs():
