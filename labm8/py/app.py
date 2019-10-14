@@ -35,6 +35,7 @@ from typing import Optional
 from typing import Union
 
 <<<<<<< HEAD:labm8/py/app.py
+<<<<<<< HEAD:labm8/py/app.py
 from absl import app as absl_app
 from absl import flags as absl_flags
 from absl import logging as absl_logging
@@ -44,10 +45,13 @@ from labm8.py.internal import flags_parsers
 from labm8.py.internal import logging
 =======
 import build_info
+=======
+>>>>>>> db19030e4... Support missing build_info package.:labm8/app.py
 from labm8 import shell
 from labm8.internal import flags_parsers
 from labm8.internal import logging
 >>>>>>> 662ce8651... Add version string to `--version` output.:labm8/app.py
+
 
 FLAGS = absl_flags.FLAGS
 
@@ -116,12 +120,16 @@ def AssertOrRaise(
 def GetVersionInformationString() -> str:
   """Return a string of version information, as printed by --version flag."""
 <<<<<<< HEAD:labm8/py/app.py
+<<<<<<< HEAD:labm8/py/app.py
+=======
+>>>>>>> db19030e4... Support missing build_info package.:labm8/app.py
   # If this is a bazel environment, then the //:build_info package will be
   # available. However, if this is a labm8 pip package install, then
   # //:build_info will not be available, so use pkg_resources to get the
   # version information.
   try:
     import build_info
+<<<<<<< HEAD:labm8/py/app.py
 
     version = "\n".join(
       [build_info.FormatVersion(), build_info.FormatShortBuildDescription(),]
@@ -145,10 +153,21 @@ def RunWithArgs(
   main: Callable[[List[str]], None], argv: Optional[List[str]] = None,
 =======
   return '\n'.join([
+=======
+    version = '\n'.join([
+>>>>>>> db19030e4... Support missing build_info package.:labm8/app.py
       build_info.FormatVersion(),
       build_info.FormatShortBuildDescription(),
-      'Copyright (C) 2014-2019 Chris Cummins <chrisc.101@gmail.com>',
-      f'<{build_info.GetGithubCommitUrl()}>',
+    ])
+    url = build_info.GetGithubCommitUrl()
+  except ModuleNotFoundError:
+    import pkg_resources
+    version = f'version: {pkg_resources.get_distribution("labm8").version}'
+    url = 'https://github.com/ChrisCummins/phd'
+  return '\n'.join([
+    version,
+    'Copyright (C) 2014-2019 Chris Cummins <chrisc.101@gmail.com>',
+    f'<{url}>',
   ])
 
 
