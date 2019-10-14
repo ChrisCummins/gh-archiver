@@ -163,7 +163,7 @@ def RunWithArgs(
   except ModuleNotFoundError:
     import pkg_resources
     version = f'version: {pkg_resources.get_distribution("labm8").version}'
-    url = 'https://github.com/ChrisCummins/phd'
+    url = 'https://github.com/ChrisCummins/labm8'
   return '\n'.join([
     version,
     'Copyright (C) 2014-2019 Chris Cummins <chrisc.101@gmail.com>',
