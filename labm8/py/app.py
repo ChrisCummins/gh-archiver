@@ -27,9 +27,13 @@ from absl import logging as absl_logging
 from typing import Any
 from typing import Callable
 <<<<<<< HEAD:labm8/py/app.py
+<<<<<<< HEAD:labm8/py/app.py
 from typing import Dict
 =======
 >>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
+=======
+from typing import Dict
+>>>>>>> 64b4031dd... Add methods to dump all flag values.:labm8/app.py
 from typing import List
 from typing import Optional
 from typing import Union
@@ -476,7 +480,11 @@ def get_calling_module_name():
 
 
 <<<<<<< HEAD:labm8/py/app.py
+<<<<<<< HEAD:labm8/py/app.py
 def FlagsToDict(json_safe: bool = False) -> Dict[str, Any]:
+=======
+def FlagsToDict() -> Dict[str, Any]:
+>>>>>>> 64b4031dd... Add methods to dump all flag values.:labm8/app.py
   """Return a dictionary of flags and their values.
 
   Keys are the names of flags, prefixed by their defining module, e.g.
@@ -490,6 +498,7 @@ def FlagsToDict(json_safe: bool = False) -> Dict[str, Any]:
   flattened_flags_dict = {}
   for module in flags_dict:
     for flag in flags_dict[module]:
+<<<<<<< HEAD:labm8/py/app.py
       flattened_flags_dict[f"{module}.{flag.name}"] = flag.value
 
   if json_safe:
@@ -506,6 +515,11 @@ def FlagsToDict(json_safe: bool = False) -> Dict[str, Any]:
   return flattened_flags_dict
 
 
+=======
+      flattened_flags_dict[f'{module}.{flag.name}'] = flag.value
+  return flattened_flags_dict
+
+>>>>>>> 64b4031dd... Add methods to dump all flag values.:labm8/app.py
 def FlagsToString() -> str:
   """Return the defined flags as a string.
 
@@ -517,6 +531,7 @@ def FlagsToString() -> str:
   return FLAGS.flags_into_string()
 
 
+<<<<<<< HEAD:labm8/py/app.py
 def DEFINE_string(
   name: str,
   default: Optional[str],
@@ -528,6 +543,8 @@ def DEFINE_string(
   absl_flags.DEFINE_string(
     name, default, help, module_name=get_calling_module_name(),
 =======
+=======
+>>>>>>> 64b4031dd... Add methods to dump all flag values.:labm8/app.py
 def DEFINE_string(
     name: str,
     default: Optional[str],
