@@ -15,6 +15,7 @@
 
 See: <https://github.com/abseil/abseil-py>
 """
+import json
 import sys
 
 import functools
@@ -90,11 +91,22 @@ skip_log_prefix = absl_logging.skip_log_prefix
 )
 <<<<<<< HEAD:labm8/py/app.py
 <<<<<<< HEAD:labm8/py/app.py
+<<<<<<< HEAD:labm8/py/app.py
 >>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/app.py
 =======
 absl_flags.DEFINE_boolean('log_colors', True, 'Whether to colorize logging output.')
 >>>>>>> a7c52c85d... Conditionally format logging output with colors.:labm8/app.py
 =======
+=======
+absl_flags.DEFINE_boolean(
+    'dump_flags',
+    False,
+    'Print the defined flags and their values and exit.')
+absl_flags.DEFINE_boolean(
+    'dump_flags_to_json',
+    False,
+    'Print the defined flags and their values to JSON and exit.')
+>>>>>>> cdc791774... Add --dump_flags and --dump_flags_to_json flags.:labm8/app.py
 absl_flags.DEFINE_boolean('log_colors', True,
                           'Whether to colorize logging output.')
 >>>>>>> 9864ff073... Stringify first argument to log calls.:labm8/app.py
@@ -199,11 +211,25 @@ def RunWithArgs(
       print(FlagsToString())
       sys.exit(0)
     elif FLAGS.dump_flags_to_json:
+<<<<<<< HEAD:labm8/py/app.py
       print(
         json.dumps(
           FlagsToDict(), sort_keys=True, indent=2, separators=(",", ": ")
         )
       )
+=======
+      flags_dict = FlagsToDict()
+      # Flags values can have non-serializable types, so try each one and
+      # stringify those that require it. An alternative would be to stringify
+      # all values, but this would lose type information on ints/floats/etc.
+      for flag in flags_dict:
+        try:
+          json.dumps(flags_dict[flag])
+        except TypeError:
+          flags_dict[flag] = str(flags_dict[flag])
+      print(json.dumps(flags_dict, sort_keys=True, indent=2,
+                       separators=(',', ': ')))
+>>>>>>> cdc791774... Add --dump_flags and --dump_flags_to_json flags.:labm8/app.py
       sys.exit(0)
     main(argv)
 
