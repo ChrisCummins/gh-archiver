@@ -212,6 +212,7 @@ def RunWithArgs(
       sys.exit(0)
     elif FLAGS.dump_flags_to_json:
 <<<<<<< HEAD:labm8/py/app.py
+<<<<<<< HEAD:labm8/py/app.py
       print(
         json.dumps(
           FlagsToDict(), sort_keys=True, indent=2, separators=(",", ": ")
@@ -228,6 +229,9 @@ def RunWithArgs(
         except TypeError:
           flags_dict[flag] = str(flags_dict[flag])
       print(json.dumps(flags_dict, sort_keys=True, indent=2,
+=======
+      print(json.dumps(FlagsToDict(), sort_keys=True, indent=2,
+>>>>>>> 6c0de7d86... Add a json_safe arg to FlagsToJson().:labm8/app.py
                        separators=(',', ': ')))
 >>>>>>> cdc791774... Add --dump_flags and --dump_flags_to_json flags.:labm8/app.py
       sys.exit(0)
@@ -507,10 +511,14 @@ def get_calling_module_name():
 
 <<<<<<< HEAD:labm8/py/app.py
 <<<<<<< HEAD:labm8/py/app.py
+<<<<<<< HEAD:labm8/py/app.py
 def FlagsToDict(json_safe: bool = False) -> Dict[str, Any]:
 =======
 def FlagsToDict() -> Dict[str, Any]:
 >>>>>>> 64b4031dd... Add methods to dump all flag values.:labm8/app.py
+=======
+def FlagsToDict(json_safe: bool = False) -> Dict[str, Any]:
+>>>>>>> 6c0de7d86... Add a json_safe arg to FlagsToJson().:labm8/app.py
   """Return a dictionary of flags and their values.
 
   Keys are the names of flags, prefixed by their defining module, e.g.
@@ -543,6 +551,18 @@ def FlagsToDict() -> Dict[str, Any]:
 
 =======
       flattened_flags_dict[f'{module}.{flag.name}'] = flag.value
+
+  if json_safe:
+    # Flags values can have non-serializable types, so try each one and
+    # stringify those that cannot be serialized to JSON. An alternative would
+    # be to stringify all values, but this would lose type information on
+    # ints/floats/etc.
+    for flag in flattened_flags_dict:
+      try:
+        json.dumps(flattened_flags_dict[flag])
+      except TypeError:
+        flattened_flags_dict[flag] = str(flattened_flags_dict[flag])
+
   return flattened_flags_dict
 
 >>>>>>> 64b4031dd... Add methods to dump all flag values.:labm8/app.py
