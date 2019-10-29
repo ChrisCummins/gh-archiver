@@ -986,6 +986,7 @@ py_library(
     visibility = ["//visibility:public"],
     deps = [
 <<<<<<< HEAD:labm8/py/BUILD
+<<<<<<< HEAD:labm8/py/BUILD
         ":humanize",
         ":labdate",
         ":pbutil",
@@ -994,6 +995,11 @@ py_library(
 =======
         ":humanize",
 >>>>>>> ae1df45af... Add a pluralized table name generator.:labm8/BUILD
+=======
+        ":humanize",
+        ":labdate",
+        ":pbutil",
+>>>>>>> a811cbd12... Auto-format BUILD files.:labm8/BUILD
         ":text",
 =======
         ":pbutil",
