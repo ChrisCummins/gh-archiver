@@ -63,8 +63,13 @@ class DatabaseFlag:
     try:
       return self.database_class(url=self.url, must_exist=self.must_exist)
     except Exception as e:
+<<<<<<< HEAD:labm8/py/internal/flags_parsers.py
       raise absl_app.UsageError(
         f"Failed to construct database {self.database_class.__name__}({self.url}): {e}"
+=======
+      raise TypeError(
+          f"Failed to construct database {self.database_class}({self.url}): {e}"
+>>>>>>> 82fdff9a1... Fix typo.:labm8/internal/flags_parsers.py
       )
 
   def __repr__(self):
