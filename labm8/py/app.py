@@ -274,6 +274,7 @@ def GetVerbosity() -> int:
   This can be set per-module using --vmodule flag.
   """
   return logging.GetModuleVerbosity(logging.GetCallingModuleName())
+<<<<<<< HEAD:labm8/py/app.py
 
 
 def _MaybeColorizeLog(color: str, msg: str, *args) -> str:
@@ -283,6 +284,8 @@ def _MaybeColorizeLog(color: str, msg: str, *args) -> str:
     return f"{shell.ShellEscapeCodes.BOLD}{color}{string}{shell.ShellEscapeCodes.END}"
   else:
     return string
+=======
+>>>>>>> 3215229ba... fix GetVerbosity in labm8.app:labm8/app.py
 
 
 def _MaybeColorizeLog(color: str, msg: str, *args) -> str:
