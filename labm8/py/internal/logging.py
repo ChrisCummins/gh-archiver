@@ -1,9 +1,7 @@
 """Internal logging library implementation."""
 import fnmatch
 import functools
-import logging
 import sys
-import time
 
 from absl import flags as absl_flags
 from absl import logging as absl_logging
@@ -11,7 +9,6 @@ from absl import logging as absl_logging
 FLAGS = absl_flags.FLAGS
 
 absl_flags.DEFINE_list(
-<<<<<<< HEAD:labm8/py/internal/logging.py
   "vmodule",
   [],
   "Per-module verbose level. The argument has to contain a comma-separated "
@@ -20,14 +17,6 @@ absl_flags.DEFINE_list(
   "filename base (that is, name ignoring .py). <log level> overrides any "
   "value given by --v.",
 )
-=======
-    'vmodule', [],
-    'Per-module verbose level. The argument has to contain a comma-separated '
-    'list of <module name>=<log level>. <module name> is a glob pattern (e.g., '
-    "gfs* for all modules whose name starts with \"gfs\"), matched against the "
-    'filename base (that is, name ignoring .py). <log level> overrides any '
-    'value given by --v.')
->>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/internal/logging.py
 
 # Logging functions.
 
@@ -103,11 +92,7 @@ def Log(calling_module_name: str, level: int, msg, *args, **kwargs):
   """
   module_level = GetModuleVerbosity(calling_module_name)
   if level <= module_level:
-<<<<<<< HEAD:labm8/py/internal/logging.py
     print_context = kwargs.pop("print_context", None)
-=======
-    print_context = kwargs.pop('print_context', None)
->>>>>>> 35fd6a724... Add `print_context` kwarg to core logger.:labm8/internal/logging.py
     if print_context:
       with print_context():
         absl_logging.info(msg, *args, **kwargs)
@@ -124,23 +109,13 @@ def Fatal(msg, *args, **kwargs):
 @absl_logging.skip_log_prefix
 def Error(msg, *args, **kwargs):
   """Logs an error message."""
-  print_context = kwargs.pop("print_context", None)
-  if print_context:
-    with print_context():
-      absl_logging.error(msg, *args, **kwargs)
-  else:
-    absl_logging.error(msg, *args, **kwargs)
+  absl_logging.error(msg, *args, **kwargs)
 
 
 @absl_logging.skip_log_prefix
 def Warning(msg, *args, **kwargs):
   """Logs a warning message."""
-  print_context = kwargs.pop("print_context", None)
-  if print_context:
-    with print_context():
-      absl_logging.warning(msg, *args, **kwargs)
-  else:
-    absl_logging.warning(msg, *args, **kwargs)
+  absl_logging.warning(msg, *args, **kwargs)
 
 
 def FlushLogs():
@@ -163,43 +138,3 @@ def SetLogLevel(level: int) -> None:
     level: the verbosity level as an integer.
   """
   absl_logging.set_verbosity(level)
-
-
-def _MyLoggingPrefix(record):
-  """Returns the log prefix for the log record.
-
-  This is a copy of absl_logging.get_absl_log_prefix(), but with reduced
-  timestamp precision (no microseconds), and no thread ID.
-
-  Args:
-    record: logging.LogRecord, the record to get prefix for.
-  """
-  created_tuple = time.localtime(record.created)
-
-  critical_prefix = ""
-  level = record.levelno
-  if absl_logging._is_non_absl_fatal_record(record):
-    # When the level is FATAL, but not logged from absl, lower the level so
-    # it's treated as ERROR.
-    level = logging.ERROR
-    critical_prefix = absl_logging._CRITICAL_PREFIX
-  severity = absl_logging.converter.get_initial_for_level(level)
-
-  return "%c%02d%02d %02d:%02d:%02d %s:%d] %s" % (
-    severity,
-    created_tuple.tm_mon,
-    created_tuple.tm_mday,
-    created_tuple.tm_hour,
-    created_tuple.tm_min,
-    created_tuple.tm_sec,
-    record.filename,
-    record.lineno,
-    critical_prefix,
-  )
-
-
-# Swap out absl's logging formatter for my own.
-absl_logging.get_absl_log_prefix = _MyLoggingPrefix
-
-# A function that computes the thread ID.
-UnsignedThreadId = absl_logging._get_thread_id
