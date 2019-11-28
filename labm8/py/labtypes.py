@@ -48,16 +48,8 @@ def is_seq(obj):
   """
   Check if an object is a sequence.
   """
-<<<<<<< HEAD:labm8/py/labtypes.py
-  return (
-    not is_str(obj)
-    and not is_dict(obj)
-    and (hasattr(obj, "__getitem__") or hasattr(obj, "__iter__"))
-  )
-=======
   return (not is_str(obj) and not is_dict(obj) and
           (hasattr(obj, '__getitem__') or hasattr(obj, '__iter__')))
->>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/labtypes.py
 
 
 def flatten(lists):
@@ -130,19 +122,9 @@ def get_class_that_defined_method(meth):
       meth = meth.__func__  # fallback to __qualname__ parsing
     if inspect.isfunction(meth):
       cls = getattr(
-<<<<<<< HEAD:labm8/py/labtypes.py
-        inspect.getmodule(meth),
-        meth.__qualname__.split(".<locals>", 1)[0].rsplit(".", 1)[0],
-      )
-=======
           inspect.getmodule(meth),
-<<<<<<< HEAD:labm8/py/labtypes.py
-          meth.__qualname__.split('.<locals>', 1)[0].rsplit('.', 1)[0])
->>>>>>> 150d66672... Auto format files.:labm8/labtypes.py
-=======
           meth.__qualname__.split('.<locals>', 1)[0].rsplit('.', 1)[0],
       )
->>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/labtypes.py
       if isinstance(cls, type):
         return cls
   else:
@@ -180,18 +162,8 @@ class ReprComparable(object):
     return str(self) >= str(other)
 
 
-<<<<<<< HEAD:labm8/py/labtypes.py
-<<<<<<< HEAD:labm8/py/labtypes.py
-def PairwiseIterator(
-  iterable: typing.Iterator[typing.Any],
-) -> typing.Iterator[typing.Tuple[typing.Any, typing.Any]]:
-=======
-def PairwiseIterator(iterable: typing.Iterator[typing.Any]
-=======
 def PairwiseIterator(iterable: typing.Iterator[typing.Any],
->>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/labtypes.py
                     ) -> typing.Iterator[typing.Tuple[typing.Any, typing.Any]]:
->>>>>>> 150d66672... Auto format files.:labm8/labtypes.py
   """Construct a pairwise iterator for a input generator.
 
   Given an iterator, produces an iterator of overlapping pairs from the input:
@@ -213,12 +185,8 @@ def PairwiseIterator(iterable: typing.Iterator[typing.Any],
 
 
 def SetDiff(
-<<<<<<< HEAD:labm8/py/labtypes.py
-  a: typing.Iterator[typing.Any], b: typing.Iterator[typing.Any],
-=======
     a: typing.Iterator[typing.Any],
     b: typing.Iterator[typing.Any],
->>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/labtypes.py
 ) -> typing.List[typing.Any]:
   """Return the set difference between two sequences.
 
@@ -253,53 +221,7 @@ def AllSubclassesOfClass(cls: typing.Type) -> typing.Set[typing.Type]:
     A set of class types.
   """
   return set(cls.__subclasses__()).union(
-<<<<<<< HEAD:labm8/py/labtypes.py
-<<<<<<< HEAD:labm8/py/labtypes.py
-    [s for c in cls.__subclasses__() for s in AllSubclassesOfClass(c)],
-  )
-
-
-def Chunkify(
-  iterable: typing.Iterable[typing.Any], chunk_size: int
-) -> typing.Iterable[typing.List[typing.Any]]:
-  """Split an iterable into chunks of a given size.
-
-  Args:
-    iterable: The iterable to split into chunks.
-    chunk_size: The size of the chunks to return.
-
-  Returns:
-    An iterator over chunks of the input iterable.
-  """
-  i = iter(iterable)
-  piece = list(itertools.islice(i, chunk_size))
-  while piece:
-    yield piece
-    piece = list(itertools.islice(i, chunk_size))
-
-
-def DeleteKeys(d, keys):
-  """Delete the keys from the given dictionary, if present.
-
-  Args:
-    d: The dictionary to remove the keys from.
-    keys: The list of keys to remove.
-
-  Returns:
-    The dictionary.
-  """
-  for key in keys:
-    if key in d:
-      del d[key]
-  return d
-=======
-      [s for c in cls.__subclasses__() for s in AllSubclassesOfClass(c)])
->>>>>>> 8a82495b7... Add labm8.labtypes.AllSubclassesOfClass() method.:labm8/labtypes.py
-=======
       [s for c in cls.__subclasses__() for s in AllSubclassesOfClass(c)],)
-<<<<<<< HEAD:labm8/py/labtypes.py
->>>>>>> 49340dc00... Auto-format labm8 python files.:labm8/labtypes.py
-=======
 
 
 def Chunkify(iterable: typing.Iterable[typing.Any],
@@ -318,9 +240,7 @@ def Chunkify(iterable: typing.Iterable[typing.Any],
   while piece:
     yield piece
     piece = list(itertools.islice(i, chunk_size))
-<<<<<<< HEAD:labm8/py/labtypes.py
->>>>>>> 8e1930394... Add labtypes.Chunkify() function.:labm8/labtypes.py
-=======
+
 
 def DeleteKeys(d, keys):
   """Delete the keys from the given dictionary, if present.
@@ -336,4 +256,3 @@ def DeleteKeys(d, keys):
     if key in d:
       del d[key]
   return d
->>>>>>> 4f357866c... Add two utility functions.:labm8/labtypes.py

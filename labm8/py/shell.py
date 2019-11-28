@@ -15,7 +15,6 @@
 import os
 
 
-
 class ShellEscapeCodes(object):
   """Shell escape codes for pretty-printing."""
   PURPLE = '\033[95m'

@@ -9,9 +9,9 @@ import re
 import subprocess
 import typing
 
-from labm8 import app
-from labm8 import archive
-from labm8 import fs
+from labm8.py import app
+from labm8.py import archive
+from labm8.py import fs
 
 # Regular expression to everything in a path up until the '*.runfiles'
 # directory, e.g. for the path '/private/var/bazel/foo/bar.runfiles/a/b/c',
