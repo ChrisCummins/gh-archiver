@@ -16,24 +16,11 @@
 
 load("@build_stack_rules_proto//python:python_proto_library.bzl", "python_proto_library")
 
-proto_library(
-    name = "github_pb",
-    srcs = ["github.proto"],
-)
-
-python_proto_library(
-    name = "github_pb_py",
-    deps = [
-        ":github_pb",
-    ],
-)
-
-py_library(
+py_binary(
     name = "api",
     srcs = ["api.py"],
     visibility = ["//visibility:public"],
     deps = [
-        ":github_pb_py",
         "//labm8/py:app",
         "//third_party/py/github",
     ],
@@ -44,7 +31,9 @@ py_test(
     srcs = ["api_test.py"],
     deps = [
         ":api",
+        "//datasets/github/testing:requires_access_token",
         "//labm8/py:app",
+        "//labm8/py:fs",
         "//labm8/py:test",
         "//third_party/py/pytest",
     ],
